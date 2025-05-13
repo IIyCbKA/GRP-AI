@@ -1,0 +1,24 @@
+:root {
+  --lower-font-size: 12px;
+  --lower-line-height: 16px;
+  --default-font-size: 16px;
+  --default-line-height: 20px;
+  --root-font-family: "Roboto Mono", monospace;
+  --text-primary: #1A1A1A;
+  --text-secondary: #737373;
+  --header-height: 48px;
+  --footer-height: 48px;
+  --max-content-width: 1280px;
+  --default-bColor: #DCDCDC;
+  --default-bgColor: #EEEEEE;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: var(--default-bgColor);
+}
