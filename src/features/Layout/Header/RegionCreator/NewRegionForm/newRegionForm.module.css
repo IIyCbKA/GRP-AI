@@ -1,0 +1,9 @@
+.formWrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: #1A1A1A6A;
+  z-index: 10000;
+}

@@ -4,8 +4,8 @@
 }
 
 .countryImgWrap {
-  height: 18px;
-  width: 18px;
+  height: var(--lower-layout-icon-size);
+  width: var(--lower-layout-icon-size);
   margin-right: 8px;
 }
 

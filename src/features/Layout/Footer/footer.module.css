@@ -1,10 +1,10 @@
-.footerContainer {
-  height: var(--footer-height);
-  border-top: 1px solid var(--default-bColor);
-}
+@layer utilities {
+  .footerContainer {
+    height: var(--footer-height);
+    border-top: 1px solid var(--default-bColor);
+  }
 
-.footerContent {
-  composes: layoutContent from "../shared/styles.module.css";
+  .footerContent {}
 }
 
 @media (max-width: 640px) {

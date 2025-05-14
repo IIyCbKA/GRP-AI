@@ -1,0 +1,6 @@
+@layer utlities {
+  .creatorWrap {
+    width: var(--lower-layout-icon-size);
+    height: var(--lower-layout-icon-size);
+  }
+}

@@ -1,3 +1,8 @@
+@layer base, components, utilities;
+/* base - basic themes */
+/* components - component modules */
+/* utilities - custom classes-redefinitions */
+
 :root {
   --lower-font-size: 12px;
   --lower-line-height: 16px;
@@ -11,6 +16,8 @@
   --max-content-width: 1280px;
   --default-bColor: #DCDCDC;
   --default-bgColor: #EEEEEE;
+  --default-layout-icon-size: 24px;
+  --lower-layout-icon-size: 18px;
 }
 
 * {

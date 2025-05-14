@@ -1,6 +1,6 @@
 .logotypeWrap {
-  width: 24px;
-  height: 24px;
+  width: var(--default-layout-icon-size);
+  height: var(--default-layout-icon-size);
 }
 
 .logotypeImg {

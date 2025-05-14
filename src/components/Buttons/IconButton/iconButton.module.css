@@ -1,0 +1,30 @@
+@layer components {
+  .iconButtonRoot {
+    height: var(--default-layout-icon-size);
+    width: var(--default-layout-icon-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: transparent;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    outline: none;
+    border: none;
+    border-radius: 100px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-secondary);
+    padding: 0;
+  }
+
+  .iconButtonRoot svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .iconButtonRoot:hover {
+    color: #278664;
+  }
+}
