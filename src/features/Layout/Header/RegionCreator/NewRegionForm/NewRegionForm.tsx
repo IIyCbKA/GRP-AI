@@ -6,5 +6,11 @@ import { NewRegionFormProps } from "./NewRegionForm.interface";
 export default function NewRegionForm({
   onClose,
 }: NewRegionFormProps): React.ReactElement {
-  return <Modal onClose={onClose}>text</Modal>;
+  const onSubmit: () => void = (): void => {};
+
+  return (
+    <Modal onClose={onClose}>
+      <form onSubmit={onSubmit} className={styles.formWrap}></form>
+    </Modal>
+  );
 }

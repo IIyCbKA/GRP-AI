@@ -16,6 +16,7 @@
   --max-content-width: 1280px;
   --default-bColor: #DCDCDC;
   --default-bgColor: #EEEEEE;
+  --default-bsColor: #0077FF40;
   --default-layout-icon-size: 24px;
   --lower-layout-icon-size: 18px;
 }
