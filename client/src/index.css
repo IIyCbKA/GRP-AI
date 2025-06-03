@@ -1,7 +1,7 @@
-@layer base, components, utilities;
+@layer base, components, utils;
 /* base - basic themes */
 /* components - component modules */
-/* utilities - custom classes-redefinitions */
+/* utils - custom classes-redefinitions */
 
 :root {
   --lower-font-size: 12px;
@@ -19,6 +19,8 @@
   --default-bsColor: #0077FF40;
   --default-layout-icon-size: 24px;
   --lower-layout-icon-size: 18px;
+
+  --overlay-layer-zIndex: 10000;
 }
 
 * {
