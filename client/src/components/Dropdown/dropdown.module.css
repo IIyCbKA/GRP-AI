@@ -1,0 +1,32 @@
+@layer components {
+  .dropdownContainer {
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
+    min-width: 300px;
+    z-index: 1000;
+    margin-top: 4px;
+    position: absolute;
+    border-radius: 12px;
+    background-color: var(--default-bgColor);
+    padding: 16px;
+    box-shadow: var(--default-bs);
+  }
+
+  .slideIn {
+    animation: slideIn 0.25s ease-out forwards;
+  }
+
+  .slideOut {
+    animation: slideOut 0.25s ease-in forwards;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(1%); opacity: 0; }
+    to   { transform: translateY(0);  opacity: 1; }
+  }
+
+  @keyframes slideOut {
+    from { transform: translateY(0);  opacity: 1; }
+    to   { transform: translateY(1%); opacity: 0; }
+  }
+}

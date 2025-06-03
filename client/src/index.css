@@ -14,6 +14,7 @@
   --header-height: 48px;
   --footer-height: 48px;
   --max-content-width: 1280px;
+  --default-color: #278664;
   --default-bColor: #DCDCDC;
   --default-bgColor: #EEEEEE;
   --default-bsColor: #0077FF40;
@@ -21,6 +22,12 @@
   --lower-layout-icon-size: 18px;
 
   --overlay-layer-zIndex: 10000;
+  --overlay-elem-zIndex: 10001;
+  --default-bs:
+    rgba(0, 0, 0, 0) 0 0 0 0,
+    rgba(0, 0, 0, 0) 0 0 0 0,
+    rgba(0, 0, 0, 0.03) 0 1px 3px 0,
+    rgba(0, 0, 0, 0.13) 0 6px 16px 0;
 }
 
 * {

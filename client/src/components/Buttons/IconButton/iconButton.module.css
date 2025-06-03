@@ -25,6 +25,6 @@
   }
 
   .iconButtonRoot:hover {
-    color: #278664;
+    color: var(--default-color);
   }
 }
