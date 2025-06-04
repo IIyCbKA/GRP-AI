@@ -4,3 +4,13 @@
     height: var(--lower-layout-icon-size);
   }
 }
+
+.creatorZone {
+  display: flex;
+}
+
+@media (max-width: 640px) {
+  .creatorZone {
+    display: none;
+  }
+}

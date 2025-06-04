@@ -16,11 +16,11 @@ export default function RegionCreator(): React.ReactElement {
   };
 
   return (
-    <>
+    <div className={styles.creatorZone}>
       <IconButton onClick={onClick} className={styles.creatorWrap}>
         <Plus />
       </IconButton>
       {isShowForm && <NewRegionForm onClose={onClose} />}
-    </>
+    </div>
   );
 }

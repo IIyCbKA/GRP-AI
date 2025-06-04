@@ -11,19 +11,11 @@ export default function PublicRoutes() {
       children: [
         {
           index: true,
-          element: <Navigate to={PUBLIC_PATHS.SELECT_REGION} replace />,
-        },
-        {
-          path: PUBLIC_PATHS.SELECT_REGION,
-          element: <div></div>,
-        },
-        {
-          path: PUBLIC_PATHS.REGION_CONFIGURATE,
           element: <div></div>,
         },
         {
           path: PUBLIC_PATHS.OTHER_PATHS,
-          element: <Navigate to={PUBLIC_PATHS.SELECT_REGION} replace />,
+          element: <Navigate to={PUBLIC_PATHS.DEFAULT} replace />,
         },
       ],
     },

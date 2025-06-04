@@ -1,4 +1,25 @@
-.headerContainer {
-  height: var(--header-height);
-  border-bottom: 1px solid var(--default-bColor);
+@layer utils {
+  .headerContainer {
+    height: var(--header-height);
+    border-bottom: 1px solid var(--default-bColor);
+    z-index: 10;
+  }
+
+  .headerContent {}
+}
+
+.menuContainer {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  @layer utils {
+    .headerContent {
+      padding: 0 12px;
+    }
+  }
+
+  .menuContainer {
+    display: flex;
+  }
 }
