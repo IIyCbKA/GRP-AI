@@ -20,7 +20,7 @@ export default function RegionCreator(): React.ReactElement {
       <IconButton onClick={onClick} className={styles.creatorWrap}>
         <Plus />
       </IconButton>
-      {isShowForm && <NewRegionForm onClose={onClose} />}
+      <NewRegionForm isShow={isShowForm} onClose={onClose} />
     </div>
   );
 }

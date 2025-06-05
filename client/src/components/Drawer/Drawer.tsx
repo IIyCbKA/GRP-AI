@@ -15,6 +15,10 @@ function DrawerInner(
     (): HTMLDivElement => innerRef.current as HTMLDivElement,
   );
 
+  const styleAnimation = {
+    "--drawer-duration": `${animationDuration}ms`,
+  } as React.CSSProperties;
+
   const containerStyles = classNames(styles.menuContainer, className);
 
   return (
@@ -23,12 +27,17 @@ function DrawerInner(
       in={isOpen}
       timeout={animationDuration}
       classNames={{
-        enterActive: styles.slideIn,
-        exitActive: styles.slideOut,
+        enterActive: styles.enterActive,
+        exitActive: styles.exitActive,
       }}
       unmountOnExit
     >
-      <div ref={innerRef} {...other} className={containerStyles} />
+      <div
+        ref={innerRef}
+        style={styleAnimation}
+        {...other}
+        className={containerStyles}
+      />
     </CSSTransition>
   );
 }

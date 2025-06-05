@@ -1,12 +1,34 @@
-.modalWrap {
-  top: 0;
-  left: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  background-color: #1A1A1A6A;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@layer components {
+  .modalWrap {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: #1A1A1A6A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    --modal-duration: 250ms;
+  }
+
+  .enterActive {
+    animation: slideIn var(--modal-duration) ease-out forwards;
+  }
+
+  .exitActive {
+    animation: slideOut var(--modal-duration) ease-in forwards;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(-1%); opacity: 0; }
+    to   { transform: translateY(0);   opacity: 1; }
+  }
+
+  @keyframes slideOut {
+    from { transform: translateY(0);   opacity: 1; }
+    to   { transform: translateY(-1%); opacity: 0; }
+  }
 }
