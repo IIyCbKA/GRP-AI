@@ -19,6 +19,7 @@
   --default-bsColor: #0077FF40;
   --default-layout-icon-size: 24px;
   --lower-layout-icon-size: 18px;
+  --regionList-width: 301px;
 
   --overlay-layer-zIndex: 10000;
   --overlay-elem-zIndex: 10001;

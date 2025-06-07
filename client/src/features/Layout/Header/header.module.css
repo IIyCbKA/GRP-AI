@@ -18,7 +18,9 @@
       padding: 0 12px;
     }
   }
+}
 
+@media (max-width: 1040px) {
   .menuContainer {
     display: flex;
   }

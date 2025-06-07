@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, RouteObject, useRoutes } from "react-router-dom";
 import { PUBLIC_PATHS } from "./publicRoutes.constants";
 import Layout from "@/features/Layout/Layout";
+import Root from "@/features/Root/Root";
 
 export default function PublicRoutes() {
   const routes: RouteObject[] = [
@@ -11,7 +12,7 @@ export default function PublicRoutes() {
       children: [
         {
           index: true,
-          element: <div></div>,
+          element: <Root />,
         },
         {
           path: PUBLIC_PATHS.OTHER_PATHS,

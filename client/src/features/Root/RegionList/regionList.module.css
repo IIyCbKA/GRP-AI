@@ -1,0 +1,21 @@
+.listContainer {
+  width: var(--regionList-width);
+  border-right: 1px solid var(--default-bColor);
+  height: calc(100dvh - var(--header-height) - var(--footer-height));
+  overflow-y: auto;
+  position: fixed;
+}
+
+.listContent {
+  width: 100%;
+  height: 100%;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1040px) {
+  .listContainer {
+    display: none;
+  }
+}

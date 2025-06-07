@@ -9,6 +9,19 @@
 
 By combining analytical calculations with AI adaptability, the app accounts for real-time external factors, delivering dynamic and precise predictions.
 
+## 🛠️ Pre-setup
+
+#### 1. **Prepare environment file**
+Copy the template and fill only the variables relevant to your environment:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+#### 2. **Configure `.env`**
+Fill in your .env file with your values
+
+
 ## 📦 Assets Attribution
 - Flags: [Rene Herrmann Figma files](https://www.figma.com/community/plugin/749888869584535589/flags) under [Community Free Resource License](https://www.figma.com/legal/community-free-resource-license) (Cropped original images).
 - Utils Icons: [Ahmad Al Haddad Figma files](https://www.figma.com/community/plugin/775671607185029020/material-design-icons-community) under [Community Free Resource License](https://www.figma.com/legal/community-free-resource-license) (Repainted original images).
