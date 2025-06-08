@@ -1,0 +1,95 @@
+@layer components {
+  .rootButton {
+    height: 40px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.18s all ease-in-out;
+    border-radius: 3px;
+    padding: 0 12px;
+    user-select: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rootButton:disabled {
+    cursor: not-allowed;
+  }
+
+  .buttonWithAdornment {
+    padding: 0 8px;
+  }
+
+  .fullWidth {
+    width: 100%;
+  }
+
+  .containedButton {
+    border: 0;
+    background-color: var(--color-action);
+    color: var(--color-surface);
+  }
+
+  .containedButton:hover {
+    background-color: var(--color-action-hover);
+  }
+
+  .containedButton:active {
+    background-color: var(--color-action-active);
+  }
+
+  .containedButton:disabled {
+    background-color: var(--color-disabled-bg);
+    color: var(--color-disabled-text);
+  }
+
+  .textButton {
+    border: 0;
+    background-color: transparent;
+    color: var(--color-action);
+  }
+
+  .textButton:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .textButton:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .textButton:disabled {
+    color: var(--color-disabled-text);
+  }
+
+  .outlinedButton {
+    border: 1px solid var(--color-action);
+    background-color: var(--color-surface);
+    color: var(--color-action);
+  }
+
+  .outlinedButton:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  .outlinedButton:active {
+    background-color: rgba(0, 0, 0, 0.08);
+    border-color: var(--color-action-active);
+  }
+
+  .outlinedButton:disabled {
+    border-color: var(--color-disabled-bg);
+    color: var(--color-disabled-text);
+  }
+
+  .adornmentContainer {
+    height: 50%;
+    aspect-ratio: 1/1;
+    margin-right: 12px;
+  }
+
+  .adornmentContainer svg {
+    height: 100%;
+    width: 100%;
+  }
+}

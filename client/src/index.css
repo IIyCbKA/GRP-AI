@@ -28,6 +28,13 @@
     rgba(0, 0, 0, 0) 0 0 0 0,
     rgba(0, 0, 0, 0.03) 0 1px 3px 0,
     rgba(0, 0, 0, 0.13) 0 6px 16px 0;
+
+  --color-action: var(--default-color);
+  --color-action-hover: #1F6D50;
+  --color-action-active: #16573D;
+  --color-disabled-bg: #EAEAEA;
+  --color-disabled-text: #A0A0A0;
+  --color-surface: white;
 }
 
 * {

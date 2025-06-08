@@ -1,0 +1,7 @@
+.infoWrap {
+  padding-left: var(--regionList-width);
+}
+
+.infoContent {
+  padding: 10px;
+}
