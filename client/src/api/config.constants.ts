@@ -1,7 +1,7 @@
 import { PathsDefinitions } from "./config.types";
 
 export const PATHS: PathsDefinitions = {
-  REGIONS: "/regions/",
+  REGIONS: "/grp/regions/",
 
-  REGION: (regionID: string): string => `/region/${regionID}/`,
+  REGION: (regionID: string): string => `/grp/region/${regionID}/`,
 };
