@@ -22,5 +22,5 @@ from .views import Health
 urlpatterns = [
   path(settings.ADMIN_URL, admin.site.urls),
   path('health/', Health.as_view(), name='healthcheck'),
-  path('grp/', include('grp.urls')),
+  path('grp/', include('gross_regional_product.urls')),
 ]
