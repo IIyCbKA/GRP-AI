@@ -82,7 +82,9 @@ const regionsSlice = createSlice({
   },
 });
 
-export const selectRegionsMap = (state: RootState): RegionsMap | null =>
+export const selectRegionsStatus = (state: RootState): LoadStatus =>
+  state.regions.status;
+export const selectRegionsMap = (state: RootState): RegionsMap =>
   state.regions.regionsMap;
 
 export const { selectRegion } = regionsSlice.actions;
