@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework.views import APIView
 from rest_framework import status, generics
 
@@ -7,14 +8,14 @@ from .models import RootInfo
 
 
 class RegionsView(APIView):
-  def get(self, request) -> Response:
+  def get(self, request: Request) -> Response:
     allRegions = RootInfo.objects.all()
     serializer = RootInfoSerializer(allRegions, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class RegionView(APIView):
-  def get(self, request, regionID: int) -> Response:
+  def get(self, request: Request, regionID: int) -> Response:
     try:
       root = RootInfo.objects.get(id=regionID)
     except RootInfo.DoesNotExist:
