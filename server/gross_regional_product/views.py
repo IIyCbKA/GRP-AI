@@ -32,7 +32,3 @@ class RegionView(APIView):
       },
       status=status.HTTP_200_OK
     )
-
-
-class CreateRegionView(generics.CreateAPIView):
-  serializer_class = RootInfoSerializer

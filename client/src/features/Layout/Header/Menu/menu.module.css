@@ -1,0 +1,20 @@
+@layer utils {
+  .drawerContent {
+    padding-top: 48px;
+  }
+
+  .menuButton {
+    height: 56px;
+    justify-content: flex-start;
+  }
+}
+
+.menuContainer {
+  display: none;
+}
+
+@media (max-width: 1040px) {
+  .menuContainer {
+    display: flex;
+  }
+}

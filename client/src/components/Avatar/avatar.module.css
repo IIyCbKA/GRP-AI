@@ -1,0 +1,12 @@
+@layer components {
+  .avatarRoot {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-surface);
+    background-color: var(--color-action);
+    border-radius: 100px;
+  }
+}
