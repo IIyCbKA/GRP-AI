@@ -1,44 +1,55 @@
 import { LoadStatus } from "./regions.enums";
 
 /*
+--------------RegionID type--------------
+*/
+export type RegionID = string;
+
+/*
 --------------RegionsSlice type--------------
 regionsMap      - map of data about regions
 selectedRegion  - selected region for demo
 status          - status of load of regionsMap
 error           - error getRegions log
 */
-export interface RegionsSlice {
-  regionsMap: RegionsMap;
-  selectedRegion: number | null;
+export type RegionsSlice = {
+  regionsMap: RegionEntities;
+  selectedRegion: RegionID | null;
   status: LoadStatus;
   error?: string;
-}
+};
 
 /*
---------------RegionsMap type--------------
+--------------RegionEntities type--------------
 key         - id of region
 value       - data about region
 */
-export interface RegionsMap {
-  [regionID: string]: RegionData;
-}
+export type RegionEntities = Record<RegionID, Region>;
 
 /*
---------------RegionData type--------------
-name    - name of region
-other...
-status  - status of load of region (filled in on client)
+--------------Region type--------------
+name       - name of region
+createdAt  - created date
+status     - status of load of region (filled in on client)
 */
-export interface RegionData {
+export type Region = Omit<RegionDTO, "id"> & { status?: LoadStatus };
+
+/*
+--------------RegionDTO type--------------
+id         - region id
+name       - name of region
+createdAt  - created date
+*/
+export type RegionDTO = {
+  id: RegionID;
   name: string;
-  /* other vars */
-  status?: LoadStatus;
-}
+  createdAt: string;
+};
 
 /*
 --------------RegionCreds type--------------
 regionID  - ID of region for loading
 */
-export interface RegionCreds {
-  regionID: string;
-}
+export type RegionCreds = {
+  regionID: RegionID;
+};

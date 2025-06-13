@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   getRegions as regionsAPI,
   getRegionData as regionDataAPI,
@@ -7,29 +7,32 @@ import { SLICE_NAME } from "./regions.constants";
 import { RootState } from "@/store/store";
 import { LoadStatus } from "./regions.enums";
 import {
-  RegionData,
+  Region,
   RegionCreds,
-  RegionsMap,
+  RegionEntities,
   RegionsSlice,
+  RegionDTO,
+  RegionID,
 } from "./regions.types";
 
-export const getRegionsMap = createAsyncThunk<RegionsMap>(
+export const getAllRegions = createAsyncThunk(
   `${SLICE_NAME}/regions`,
-  async (): Promise<RegionsMap> => {
-    const raw: RegionsMap = await regionsAPI();
+  async (): Promise<RegionEntities> => {
+    const list: RegionDTO[] = await regionsAPI();
 
-    return Object.fromEntries(
-      Object.entries(raw).map(([id, region]: [string, any]): [string, any] => [
-        id,
-        { ...region, status: LoadStatus.IDLE },
-      ]),
+    return list.reduce<RegionEntities>(
+      (acc: RegionEntities, { id, ...rest }: RegionDTO): RegionEntities => {
+        acc[id] = { ...rest, status: LoadStatus.IDLE };
+        return acc;
+      },
+      {},
     );
   },
 );
 
-export const getRegionData = createAsyncThunk<RegionData, RegionCreds>(
+export const getRegionData = createAsyncThunk(
   `${SLICE_NAME}/region`,
-  async (creds: RegionCreds): Promise<RegionData> => {
+  async (creds: RegionCreds): Promise<Region> => {
     return await regionDataAPI(creds);
   },
 );
@@ -42,20 +45,20 @@ const regionsSlice = createSlice({
     status: LoadStatus.IDLE,
   } as RegionsSlice,
   reducers: {
-    selectRegion: (state, action): void => {
-      state.selectedRegion = action.payload.regionID;
+    selectRegion: (state, action: PayloadAction<RegionID>): void => {
+      state.selectedRegion = action.payload;
     },
   },
   extraReducers: (builder): void => {
     builder
-      .addCase(getRegionsMap.pending, (state): void => {
+      .addCase(getAllRegions.pending, (state): void => {
         state.status = LoadStatus.LOADING;
       })
-      .addCase(getRegionsMap.fulfilled, (state, action): void => {
+      .addCase(getAllRegions.fulfilled, (state, action): void => {
         state.regionsMap = action.payload;
         state.status = LoadStatus.SUCCEEDED;
       })
-      .addCase(getRegionsMap.rejected, (state, action): void => {
+      .addCase(getAllRegions.rejected, (state, action): void => {
         state.status = LoadStatus.FAILED;
         state.error = action.error.message;
       })
@@ -71,6 +74,7 @@ const regionsSlice = createSlice({
 
         /* if region wasn't in state, but he was in server - adding record */
         state.regionsMap[regionID] = action.payload;
+        state.regionsMap[regionID].status = LoadStatus.SUCCEEDED;
       })
       .addCase(getRegionData.rejected, (state, action): void => {
         const regionID = action.meta.arg.regionID;
@@ -84,7 +88,7 @@ const regionsSlice = createSlice({
 
 export const selectRegionsStatus = (state: RootState): LoadStatus =>
   state.regions.status;
-export const selectRegionsMap = (state: RootState): RegionsMap =>
+export const selectRegionsMap = (state: RootState): RegionEntities =>
   state.regions.regionsMap;
 
 export const { selectRegion } = regionsSlice.actions;
