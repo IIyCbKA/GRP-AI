@@ -4,7 +4,6 @@ import { useAppSelector } from "@/store/hooks";
 import { selectRegionsMap } from "../regions.slice";
 import { Region, RegionID } from "../regions.types";
 import Button from "@/components/Buttons/Button/Button";
-import { ButtonVariant } from "@/components/Buttons/Button/button.enums";
 import Avatar from "@/components/Avatar/Avatar";
 
 export default function RegionsList(): React.ReactElement {
@@ -29,7 +28,7 @@ export default function RegionsList(): React.ReactElement {
                 fullWidth
                 adornment={<Avatar>{avatarTitle}</Avatar>}
                 className={styles.regionButton}
-                variant={ButtonVariant.Text}
+                variant="text"
                 onClick={(): void => onRegionClick(regionID)}
               >
                 {regionData.name}

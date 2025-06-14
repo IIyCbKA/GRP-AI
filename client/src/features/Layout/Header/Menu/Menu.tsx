@@ -6,7 +6,6 @@ import { useAppSelector } from "@/store/hooks";
 import { selectRegionsMap } from "@/features/Regions/regions.slice";
 import { Region, RegionID } from "@/features/Regions/regions.types";
 import Button from "@/components/Buttons/Button/Button";
-import { ButtonVariant } from "@/components/Buttons/Button/button.enums";
 import Avatar from "@/components/Avatar/Avatar";
 
 export default function Menu(): React.ReactElement {
@@ -37,7 +36,7 @@ export default function Menu(): React.ReactElement {
                 fullWidth
                 adornment={<Avatar>{avatarTitle}</Avatar>}
                 className={styles.menuButton}
-                variant={ButtonVariant.Text}
+                variant="text"
                 onClick={(): void => onRegionClick(regionID)}
               >
                 {regionData.name}

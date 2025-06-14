@@ -3,7 +3,6 @@ import styles from "./button.module.css";
 import sharedStyles from "@/shared/shared.module.css";
 import classNames from "classnames";
 import { ButtonProps } from "./Button.interface";
-import { ButtonVariant } from "./button.enums";
 
 function ButtonInner(
   {
@@ -12,7 +11,7 @@ function ButtonInner(
     className,
     type = "button",
     adornment,
-    variant = ButtonVariant.Text,
+    variant = "text",
     ...other
   }: ButtonProps,
   ref: React.ForwardedRef<HTMLButtonElement>,
@@ -23,9 +22,9 @@ function ButtonInner(
     className,
     {
       [styles.fullWidth]: fullWidth,
-      [styles.containedButton]: variant === ButtonVariant.Contained,
-      [styles.textButton]: variant === ButtonVariant.Text,
-      [styles.outlinedButton]: variant === ButtonVariant.Outlined,
+      [styles.containedButton]: variant === "contained",
+      [styles.textButton]: variant === "text",
+      [styles.outlinedButton]: variant === "outlined",
       [styles.buttonWithAdornment]: adornment,
     },
   );

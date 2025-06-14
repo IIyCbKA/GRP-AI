@@ -6,7 +6,7 @@ variant     - variant of button style
 */
 
 import React, { ButtonHTMLAttributes } from "react";
-import { ButtonVariant } from "./button.enums";
+import { ButtonVariant } from "./button.types";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
