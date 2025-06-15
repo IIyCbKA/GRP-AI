@@ -3,22 +3,28 @@ from rest_framework.request import Request
 from rest_framework.views import APIView
 from rest_framework import status, generics
 
-from .serializers import RootInfoSerializer, DataSerializer
-from .models import RootInfo
+from .serializers import (
+  RegionsSerializer,
+  DataSerializer,
+  CreateRegionsSerializer,
+  CreateParametersSerializer,
+  CreateDataSerializer
+)
+from .models import Regions
 
 
 class RegionsView(APIView):
   def get(self, request: Request) -> Response:
-    allRegions = RootInfo.objects.all()
-    serializer = RootInfoSerializer(allRegions, many=True)
+    allRegions = Regions.objects.all()
+    serializer = RegionsSerializer(allRegions, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class RegionView(APIView):
   def get(self, request: Request, regionID: int) -> Response:
     try:
-      root = RootInfo.objects.get(id=regionID)
-    except RootInfo.DoesNotExist:
+      root = Regions.objects.get(id=regionID)
+    except Regions.DoesNotExist:
       return Response(status=status.HTTP_404_NOT_FOUND)
 
     data = root.data.all()
@@ -32,3 +38,15 @@ class RegionView(APIView):
       },
       status=status.HTTP_200_OK
     )
+
+
+class CreateRegions(generics.CreateAPIView):
+  serializer_class = CreateRegionsSerializer
+
+
+class CreateParameters(generics.CreateAPIView):
+  serializer_class = CreateParametersSerializer
+
+
+class CreateData(generics.CreateAPIView):
+  serializer_class = CreateDataSerializer

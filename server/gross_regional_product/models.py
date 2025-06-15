@@ -1,17 +1,33 @@
 from django.db import models
+from datetime import datetime
 
 
-class RootInfo(models.Model):
-  id = models.AutoField(primary_key=True)
+class Regions(models.Model):
+  id = models.BigIntegerField(primary_key=True, unique=True)
   name = models.CharField(max_length=255)
   created_at = models.DateTimeField(auto_now_add=True)
 
 
+class Parameters(models.Model):
+  id = models.BigIntegerField(primary_key=True, unique=True)
+  name = models.CharField(max_length=511, unique=True)
+  measure = models.CharField(max_length=255)
+
+
 class Data(models.Model):
-  root = models.ForeignKey(
-    RootInfo,
+  id = models.AutoField(primary_key=True)
+  region = models.ForeignKey(
+    Regions,
     on_delete=models.CASCADE,
     related_name='data',
   )
+  parameter = models.ForeignKey(
+    Parameters,
+    on_delete=models.CASCADE,
+    related_name='data',
+  )
+  date = models.IntegerField(default=datetime.now().year)
+  value = models.FloatField(default=0.0)
 
-  # fields
+  class Meta:
+    unique_together = [('region', 'parameter', 'date')]
