@@ -1,6 +1,8 @@
 @layer utils {
   .drawerContent {
     padding-top: 48px;
+    display: flex;
+    flex-direction: column;
   }
 
   .menuButton {

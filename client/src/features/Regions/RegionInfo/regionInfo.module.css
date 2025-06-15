@@ -1,7 +1,24 @@
 .infoWrap {
   padding-left: var(--regionList-width);
+  flex: 1 0 auto;
 }
 
 .infoContent {
   padding: 10px;
+  height: 100%;
+}
+
+.nonselectedContent {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1040px) {
+  .infoWrap {
+    padding-left: 0;
+  }
 }

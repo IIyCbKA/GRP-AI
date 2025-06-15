@@ -90,6 +90,8 @@ export const selectRegionsStatus = (state: RootState): LoadStatus =>
   state.regions.status;
 export const selectRegionsMap = (state: RootState): RegionEntities =>
   state.regions.regionsMap;
+export const selectSelectedRegion = (state: RootState): string | null =>
+  state.regions.selectedRegion;
 
 export const { selectRegion } = regionsSlice.actions;
 export default regionsSlice.reducer;
