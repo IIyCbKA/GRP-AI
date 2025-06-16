@@ -7,11 +7,17 @@ class Regions(models.Model):
   name = models.CharField(max_length=255)
   created_at = models.DateTimeField(auto_now_add=True)
 
+  def __str__(self):
+    return self.name
+
 
 class Parameters(models.Model):
   id = models.BigIntegerField(primary_key=True, unique=True)
   name = models.CharField(max_length=511, unique=True)
   measure = models.CharField(max_length=255)
+
+  def __str__(self):
+    return self.name
 
 
 class Data(models.Model):
@@ -31,3 +37,6 @@ class Data(models.Model):
 
   class Meta:
     unique_together = [('region', 'parameter', 'date')]
+
+  def __str__(self):
+    return f"{self.region} - {self.parameter} {self.date}: {self.value}"
