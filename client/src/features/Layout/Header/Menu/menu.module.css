@@ -8,6 +8,7 @@
   .menuButton {
     height: 56px;
     justify-content: flex-start;
+    flex-shrink: 0;
   }
 }
 

@@ -31,6 +31,7 @@ function Content(): React.ReactElement {
             <Button
               key={regionID}
               fullWidth
+              title={regionData.name}
               adornment={<Avatar>{avatarTitle}</Avatar>}
               className={styles.regionButton}
               variant="text"
