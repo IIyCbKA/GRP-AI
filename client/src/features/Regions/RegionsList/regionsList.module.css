@@ -4,6 +4,7 @@
     height: 48px;
     justify-content: flex-start;
     flex-shrink: 0;
+    color: var(--text-primary);
   }
 }
 
