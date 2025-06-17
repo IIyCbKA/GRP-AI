@@ -1,7 +1,12 @@
 import React from "react";
 import styles from "./regionsList.module.css";
-import { useAppSelector } from "@/store/hooks";
-import { selectRegionsMap, selectRegionsStatus } from "../regions.slice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  getRegionData,
+  selectRegion,
+  selectRegionsMap,
+  selectRegionsStatus,
+} from "../regions.slice";
 import { Region, RegionID } from "../regions.types";
 import Button from "@/components/Buttons/Button/Button";
 import Avatar from "@/components/Avatar/Avatar";
@@ -11,11 +16,13 @@ import LoadingOverlay from "@/components/LoadingOverlay/LoadingOverlay";
 function Content(): React.ReactElement {
   const regionsStatus = useAppSelector(selectRegionsStatus);
   const regionEntities = useAppSelector(selectRegionsMap);
+  const dispatch = useAppDispatch();
 
   const onRegionClick: (regionID: RegionID) => void = (
     regionID: RegionID,
   ): void => {
-    console.log(regionID);
+    dispatch(selectRegion(regionID));
+    dispatch(getRegionData(regionID));
   };
 
   if (regionsStatus === LoadStatus.LOADING)

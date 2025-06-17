@@ -18,8 +18,8 @@ class ParametersAdmin(admin.ModelAdmin):
 
 @admin.register(Data)
 class DataAdmin(admin.ModelAdmin):
-    list_display        = ('id', 'region', 'parameter', 'date', 'value')
+    list_display        = ('id', 'region', 'parameter', 'year', 'value')
     list_select_related = ('region', 'parameter')
     search_fields       = ('region__name', 'parameter__name')
-    list_filter         = ('region', 'parameter', 'date')
+    list_filter         = ('region', 'parameter', 'year')
     ordering            = ('id',)

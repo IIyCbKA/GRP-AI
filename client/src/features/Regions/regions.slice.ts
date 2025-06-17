@@ -1,21 +1,21 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  getRegions as regionsAPI,
   getRegionData as regionDataAPI,
+  getRegions as regionsAPI,
 } from "./regions.api";
 import { SLICE_NAME } from "./regions.constants";
 import { RootState } from "@/store/store";
 import { LoadStatus } from "./regions.enums";
 import {
   Region,
-  RegionCreds,
-  RegionEntities,
-  RegionsSlice,
+  RegionDataThunkCfg,
   RegionDTO,
+  RegionEntities,
   RegionID,
+  RegionsSlice,
 } from "./regions.types";
 
-export const getAllRegions = createAsyncThunk(
+export const getAllRegions = createAsyncThunk<RegionEntities>(
   `${SLICE_NAME}/regions`,
   async (): Promise<RegionEntities> => {
     const list: RegionDTO[] = await regionsAPI();
@@ -30,10 +30,25 @@ export const getAllRegions = createAsyncThunk(
   },
 );
 
-export const getRegionData = createAsyncThunk(
+export const getRegionData = createAsyncThunk<
+  Region,
+  RegionID,
+  RegionDataThunkCfg
+>(
   `${SLICE_NAME}/region`,
-  async (creds: RegionCreds): Promise<Region> => {
-    return await regionDataAPI(creds);
+  async (regionID: RegionID): Promise<Region> => {
+    return await regionDataAPI(regionID);
+  },
+  {
+    condition: (regionID: RegionID, { getState }): boolean => {
+      const { regionsMap } = getState().regions;
+      const region: Region = regionsMap[regionID];
+      return (
+        region &&
+        (region.status === LoadStatus.IDLE ||
+          region.status === LoadStatus.FAILED)
+      );
+    },
   },
 );
 
@@ -63,25 +78,20 @@ const regionsSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(getRegionData.pending, (state, action): void => {
-        const regionID = action.meta.arg.regionID;
+        const regionID = action.meta.arg;
 
-        if (state.regionsMap[regionID]) {
-          state.regionsMap[regionID].status = LoadStatus.LOADING;
-        }
+        state.regionsMap[regionID].status = LoadStatus.LOADING;
       })
       .addCase(getRegionData.fulfilled, (state, action): void => {
-        const regionID = action.meta.arg.regionID;
+        const regionID = action.meta.arg;
 
-        /* if region wasn't in state, but he was in server - adding record */
         state.regionsMap[regionID] = action.payload;
         state.regionsMap[regionID].status = LoadStatus.SUCCEEDED;
       })
       .addCase(getRegionData.rejected, (state, action): void => {
-        const regionID = action.meta.arg.regionID;
+        const regionID = action.meta.arg;
 
-        if (state.regionsMap[regionID]) {
-          state.regionsMap[regionID].status = LoadStatus.FAILED;
-        }
+        state.regionsMap[regionID].status = LoadStatus.FAILED;
       });
   },
 });

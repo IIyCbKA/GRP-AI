@@ -32,11 +32,11 @@ class Data(models.Model):
     on_delete=models.CASCADE,
     related_name='data',
   )
-  date = models.IntegerField(default=datetime.now().year)
+  year = models.IntegerField(default=datetime.now().year)
   value = models.FloatField(default=0.0)
 
   class Meta:
-    unique_together = [('region', 'parameter', 'date')]
+    unique_together = [('region', 'parameter', 'year')]
 
   def __str__(self):
-    return f"{self.region} - {self.parameter} {self.date}: {self.value}"
+    return f"{self.region} - {self.parameter} {self.year}: {self.value}"

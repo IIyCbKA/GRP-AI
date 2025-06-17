@@ -1,4 +1,5 @@
 import { LoadStatus } from "./regions.enums";
+import { RootState } from "@/store/store";
 
 /*
 --------------RegionID type--------------
@@ -47,9 +48,7 @@ export type RegionDTO = {
 };
 
 /*
---------------RegionCreds type--------------
-regionID  - ID of region for loading
+--------------RegionDataThunkCfg type--------------
+state       - root redux app state
 */
-export type RegionCreds = {
-  regionID: RegionID;
-};
+export type RegionDataThunkCfg = { state: RootState };

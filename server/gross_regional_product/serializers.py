@@ -37,7 +37,7 @@ class DataSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = Data
-    fields = ['id', 'region_id', 'parameter_id', 'value', 'date']
+    fields = ['id', 'region_id', 'parameter_id', 'value', 'year']
     read_only_fields = ['id', ]
     list_serializer_class = BulkCreateListSerializer
 
