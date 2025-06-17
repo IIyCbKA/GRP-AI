@@ -1,14 +1,14 @@
 /*
 --------------PathsDefinitions type--------------
 ENDPOINTS:
-  REGIONS  - for get-request that returns a list of all existing regions
+  ROOT_INFO   - for get-request that returns all existing regions and list of all existing parameters
 
 PATHS:
-  REGION   - for get-request that returns a data of existing region
+  REGION      - for get-request that returns a data of existing region
 */
 
 export interface PathsDefinitions {
-  REGIONS: string;
+  ROOT_INFO: string;
 
   REGION: (regionID: string) => string;
 }

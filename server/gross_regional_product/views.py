@@ -8,16 +8,27 @@ from .serializers import (
   DataSerializer,
   CreateRegionsSerializer,
   CreateParametersSerializer,
-  CreateDataSerializer
+  CreateDataSerializer,
+  ParametersSerializer
 )
-from .models import Regions
+from .models import Regions, Parameters
 
 
-class RegionsView(APIView):
+class RegionsAndParametersView(APIView):
   def get(self, request: Request) -> Response:
-    allRegions = Regions.objects.all()
-    serializer = RegionsSerializer(allRegions, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    all_regions = Regions.objects.all()
+    regions_serializer = RegionsSerializer(all_regions, many=True)
+
+    all_parameters = Parameters.objects.all()
+    parameters_serializer = ParametersSerializer(all_parameters, many=True)
+
+    return Response(
+      {
+        "regions": regions_serializer.data,
+        "parameters": parameters_serializer.data
+      },
+      status=status.HTTP_200_OK
+    )
 
 
 class RegionView(APIView):

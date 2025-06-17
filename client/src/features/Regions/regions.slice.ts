@@ -1,32 +1,46 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   getRegionData as regionDataAPI,
-  getRegions as regionsAPI,
+  getRoot as regionsAPI,
 } from "./regions.api";
 import { SLICE_NAME } from "./regions.constants";
 import { RootState } from "@/store/store";
 import { LoadStatus } from "./regions.enums";
 import {
+  ParameterDTO,
+  ParameterEntities,
   Region,
   RegionDataThunkCfg,
   RegionDTO,
   RegionEntities,
   RegionID,
   RegionsSlice,
+  RootEntities,
 } from "./regions.types";
 
-export const getAllRegions = createAsyncThunk<RegionEntities>(
-  `${SLICE_NAME}/regions`,
-  async (): Promise<RegionEntities> => {
-    const list: RegionDTO[] = await regionsAPI();
+export const getRootInfo = createAsyncThunk<RootEntities>(
+  `${SLICE_NAME}/root`,
+  async (): Promise<RootEntities> => {
+    const data = await regionsAPI();
 
-    return list.reduce<RegionEntities>(
-      (acc: RegionEntities, { id, ...rest }: RegionDTO): RegionEntities => {
+    const regions: RegionEntities = data.regions.reduce<RegionEntities>(
+      (acc, { id, ...rest }: RegionDTO): RegionEntities => {
         acc[id] = { ...rest, status: LoadStatus.IDLE };
         return acc;
       },
       {},
     );
+
+    const parameters: ParameterEntities =
+      data.parameters.reduce<ParameterEntities>(
+        (acc, { id, ...rest }: ParameterDTO): ParameterEntities => {
+          acc[id] = { ...rest };
+          return acc;
+        },
+        {},
+      );
+
+    return { regions, parameters };
   },
 );
 
@@ -56,6 +70,7 @@ const regionsSlice = createSlice({
   name: SLICE_NAME,
   initialState: {
     regionsMap: {},
+    parametersMap: {},
     selectedRegion: null,
     status: LoadStatus.IDLE,
   } as RegionsSlice,
@@ -66,14 +81,15 @@ const regionsSlice = createSlice({
   },
   extraReducers: (builder): void => {
     builder
-      .addCase(getAllRegions.pending, (state): void => {
+      .addCase(getRootInfo.pending, (state): void => {
         state.status = LoadStatus.LOADING;
       })
-      .addCase(getAllRegions.fulfilled, (state, action): void => {
-        state.regionsMap = action.payload;
+      .addCase(getRootInfo.fulfilled, (state, action): void => {
+        state.regionsMap = action.payload.regions;
+        state.parametersMap = action.payload.parameters;
         state.status = LoadStatus.SUCCEEDED;
       })
-      .addCase(getAllRegions.rejected, (state, action): void => {
+      .addCase(getRootInfo.rejected, (state, action): void => {
         state.status = LoadStatus.FAILED;
         state.error = action.error.message;
       })

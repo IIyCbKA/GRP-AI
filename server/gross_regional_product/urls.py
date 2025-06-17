@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-  RegionsView,
+  RegionsAndParametersView,
   RegionView,
   CreateRegions,
   CreateParameters,
@@ -8,7 +8,7 @@ from .views import (
 )
 
 urlpatterns = [
-  path('regions/', RegionsView.as_view(), name='grp_regions'),
+  path('root/', RegionsAndParametersView.as_view(), name='grp_root'),
   path('region/<int:regionID>/', RegionView.as_view(), name='grp_region'),
   path('create/regions/', CreateRegions.as_view(), name='grp_create_regions'),
   path('create/parameters/', CreateParameters.as_view(), name='grp_create_parameters'),

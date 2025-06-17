@@ -1,9 +1,9 @@
 import { apiClient } from "@/api/client";
 import { PATHS } from "@/api/config.constants";
-import { Region, RegionDTO, RegionID } from "./regions.types";
+import { Region, RegionID, RootDTO } from "./regions.types";
 
-export async function getRegions(): Promise<RegionDTO[]> {
-  const { data } = await apiClient.get(PATHS.REGIONS);
+export async function getRoot(): Promise<RootDTO> {
+  const { data } = await apiClient.get(PATHS.ROOT_INFO);
   return data;
 }
 
