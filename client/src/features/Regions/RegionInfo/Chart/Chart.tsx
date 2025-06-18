@@ -11,38 +11,31 @@ import {
 import { ChartProps } from "./Chart.interface";
 import styles from "./chart.module.css";
 
-export default function Chart({
-  title,
-  measure,
-  data,
-}: ChartProps): React.ReactElement {
+export default function Chart({ title, data }: ChartProps): React.ReactElement {
   return (
     <div className={styles.chartWrap}>
-      {title}
-      <LineChart
-        width={800}
-        height={300}
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="year" />
-        <YAxis
-          dataKey="value"
-          label={{
-            value: measure,
-            angle: -90,
-            dx: -45,
-          }}
-        />
-        <Tooltip />
-        <Line type="monotone" dataKey="value" stroke="#8884d8" />
-      </LineChart>
+      <span className={styles.titleZone}>{title}</span>
+      <div className={styles.chartZone}>
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            width={800}
+            height={400}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="year" />
+            <YAxis dataKey="value" />
+            <Tooltip />
+            <Line type="monotone" dataKey="value" stroke="#8884d8" />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

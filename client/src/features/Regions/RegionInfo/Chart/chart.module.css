@@ -1,3 +1,20 @@
 .chartWrap {
-  margin-bottom: 24px;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartZone {
+  flex-grow: 1;
+}
+
+.titleZone {
+  display: flex;
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: center;
+  justify-content: center;
+  flex-shrink: 0;
 }

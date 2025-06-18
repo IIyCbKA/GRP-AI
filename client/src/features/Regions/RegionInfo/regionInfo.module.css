@@ -1,6 +1,6 @@
 .infoWrap {
   padding-left: var(--regionList-width);
-  flex: 1 0 auto;
+  width: 100%;
 }
 
 .infoContent {

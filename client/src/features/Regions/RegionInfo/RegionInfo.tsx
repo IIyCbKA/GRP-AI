@@ -31,11 +31,7 @@ function Content(): React.ReactElement {
           string,
           EntityForChart[],
         ]): React.ReactElement => (
-          <Chart
-            title={parameters[parameterID].name}
-            measure={parameters[parameterID].measure}
-            data={parameterData}
-          />
+          <Chart title={parameters[parameterID].name} data={parameterData} />
         ),
       )}
     </>
