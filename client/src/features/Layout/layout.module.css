@@ -5,6 +5,7 @@
 }
 
 .contentWrap {
-  flex: 1 0 auto;
+  padding-top: var(--header-height);
+  padding-bottom: var(--footer-height);
   display: flex;
 }

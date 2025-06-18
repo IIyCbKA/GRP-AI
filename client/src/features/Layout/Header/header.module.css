@@ -3,6 +3,9 @@
     height: var(--header-height);
     border-bottom: 1px solid var(--default-bColor);
     z-index: 10;
+    top: 0;
+    right: 0;
+    left: 0;
   }
 
   .headerContent {}

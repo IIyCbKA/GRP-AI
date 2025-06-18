@@ -1,9 +1,10 @@
 @layer base {
   .layoutContainer {
-    position: relative;
+    position: fixed;
     display: flex;
     justify-content: center;
     flex-shrink: 0;
+    background-color: var(--default-bgColor);
   }
 
   .layoutContent {

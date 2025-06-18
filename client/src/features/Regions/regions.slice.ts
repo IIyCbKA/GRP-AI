@@ -116,8 +116,16 @@ export const selectRegionsStatus = (state: RootState): LoadStatus =>
   state.regions.status;
 export const selectRegionsMap = (state: RootState): RegionEntities =>
   state.regions.regionsMap;
-export const selectSelectedRegion = (state: RootState): string | null =>
+export const selectParametersMap = (state: RootState): ParameterEntities =>
+  state.regions.parametersMap;
+export const selectSelectedRegion = (state: RootState): RegionID | null =>
   state.regions.selectedRegion;
+export const selectSelectedRegionData = (
+  state: RootState,
+): Region | undefined => {
+  const { selectedRegion, regionsMap } = state.regions;
+  return selectedRegion ? regionsMap[selectedRegion] : undefined;
+};
 
 export const { selectRegion } = regionsSlice.actions;
 export default regionsSlice.reducer;

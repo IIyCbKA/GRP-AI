@@ -8,6 +8,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.0",
     "react-transition-group": "^4.4.5",
+    "recharts": "^2.15.3",
     "serve": "^14.2.4"
   },
   "devDependencies": {
