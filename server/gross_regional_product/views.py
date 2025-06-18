@@ -12,6 +12,8 @@ from .serializers import (
   ParametersSerializer
 )
 from .models import Regions, Parameters
+from .services import predict_region_period
+from .constants import LOOKBACK_YEARS
 
 
 class RegionsAndParametersView(APIView):
@@ -50,6 +52,33 @@ class RegionView(APIView):
       },
       status=status.HTTP_200_OK
     )
+
+
+class RegionPredictView(APIView):
+  def get(
+    self,
+    request: Request,
+    regionID: int,
+    year: int,
+    period: int
+  ) -> Response:
+    try:
+      result = predict_region_period(
+        region_id=regionID,
+        start_year=year,
+        period=period,
+        window=LOOKBACK_YEARS,
+      )
+      return Response(
+        {
+          "region": regionID,
+          "period": period,
+          "forecast": result
+        }, status=status.HTTP_200_OK
+      )
+
+    except ValueError:
+      return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class CreateRegions(generics.CreateAPIView):
