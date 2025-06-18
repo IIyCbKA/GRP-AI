@@ -6,6 +6,10 @@
     flex-shrink: 0;
     color: var(--text-primary);
   }
+
+  .selectedRegionButton {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 .listContainer {

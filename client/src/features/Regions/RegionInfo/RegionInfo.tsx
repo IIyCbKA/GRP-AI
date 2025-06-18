@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./regionInfo.module.css";
+import sharedStyles from "@/shared/shared.module.css";
 import { useAppSelector } from "@/store/hooks";
 import {
   selectParametersMap,
@@ -10,6 +11,7 @@ import { NON_SELECTED_TEXT } from "./regionInfo.constants";
 import Chart from "./Chart/Chart";
 import { getSortedData } from "./regionInfo.utils";
 import { EntityChartData, ChartData } from "../regions.types";
+import classNames from "classnames";
 
 function Content(): React.ReactElement {
   const selectedRegion = useAppSelector(selectSelectedRegion);
@@ -24,8 +26,11 @@ function Content(): React.ReactElement {
   if (selectedRegion === null)
     return <div className={styles.nonselectedContent}>{NON_SELECTED_TEXT}</div>;
 
+  const titleStyles = classNames(styles.infoTitle, sharedStyles.upperText);
+
   return (
     <>
+      <span className={titleStyles}>{selectedRegionData?.name}</span>
       {Object.entries(data).map(
         ([parameterID, parameterData]: [
           string,

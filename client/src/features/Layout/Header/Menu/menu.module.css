@@ -1,6 +1,5 @@
 @layer utils {
   .drawerContent {
-    padding-top: 48px;
     display: flex;
     flex-direction: column;
   }
@@ -11,10 +10,24 @@
     flex-shrink: 0;
     color: var(--text-primary);
   }
+
+  .selectedMenuButton {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 .menuContainer {
   display: none;
+}
+
+.menuTitle {
+  width: 100%;
+  height: var(--header-height);
+  flex-shrink: 0;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 @media (max-width: 1040px) {

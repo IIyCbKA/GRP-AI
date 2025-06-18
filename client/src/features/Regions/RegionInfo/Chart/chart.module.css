@@ -4,6 +4,7 @@
   height: 380px;
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .chartZone {
@@ -11,10 +12,7 @@
 }
 
 .titleZone {
-  display: flex;
   width: 100%;
-  margin-bottom: 8px;
   text-align: center;
-  justify-content: center;
   flex-shrink: 0;
 }

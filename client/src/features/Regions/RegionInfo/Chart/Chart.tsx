@@ -18,13 +18,11 @@ export default function Chart({ title, data }: ChartProps): React.ReactElement {
       <div className={styles.chartZone}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
-            width={800}
-            height={400}
             data={data}
             margin={{
               top: 5,
               right: 30,
-              left: 20,
+              left: 5,
               bottom: 5,
             }}
           >
