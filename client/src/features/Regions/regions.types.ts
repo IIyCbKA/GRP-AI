@@ -30,10 +30,16 @@ export type RegionEntities = Record<RegionID, Region>;
 /*
 --------------Region type--------------
 name       - name of region
+data       - data of region
 createdAt  - created date
 status     - status of load of region (filled in on client)
 */
-export type Region = Omit<RegionDTO, "id"> & { status?: LoadStatus };
+export type Region = {
+  name: string;
+  data: RegionDataEntity[];
+  createdAt: string;
+  status?: LoadStatus;
+};
 
 /*
 --------------RegionDTO type--------------
@@ -45,8 +51,19 @@ createdAt  - created date
 export type RegionDTO = {
   id: RegionID;
   name: string;
-  data: RegionDataEntity[];
-  createdAt: string;
+  data: RegionDataDTO[];
+  created_at: string;
+};
+
+/*
+--------------RegionDataDTO type--------------
+*/
+export type RegionDataDTO = {
+  id: number;
+  region_id: number;
+  parameter_id: number;
+  value: number;
+  year: number;
 };
 
 /*
@@ -54,8 +71,8 @@ export type RegionDTO = {
 */
 export type RegionDataEntity = {
   id: number;
-  region_id: number;
-  parameter_id: number;
+  regionID: number;
+  parameterID: number;
   value: number;
   year: number;
 };
@@ -113,16 +130,16 @@ export type RootEntities = {
 };
 
 /*
---------------RecordsForChart type--------------
+--------------ChartData type--------------
 key    - parameterID
 value  - list of Entity for chart
 */
-export type RecordsForChart = Record<string, EntityForChart[]>;
+export type ChartData = Record<string, EntityChartData[]>;
 
 /*
---------------EntityForChart type--------------
+--------------EntityChartData type--------------
 */
-export type EntityForChart = {
+export type EntityChartData = {
   year: number;
   value: number;
 };

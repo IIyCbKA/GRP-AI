@@ -16,16 +16,24 @@ import {
   RegionID,
   RegionsSlice,
   RootEntities,
+  RegionDataDTO,
+  RegionDataEntity,
+  RootDTO,
 } from "./regions.types";
 
 export const getRootInfo = createAsyncThunk<RootEntities>(
   `${SLICE_NAME}/root`,
   async (): Promise<RootEntities> => {
-    const data = await regionsAPI();
+    const data: RootDTO = await regionsAPI();
 
     const regions: RegionEntities = data.regions.reduce<RegionEntities>(
-      (acc, { id, ...rest }: RegionDTO): RegionEntities => {
-        acc[id] = { ...rest, status: LoadStatus.IDLE };
+      (acc: RegionEntities, { id, ...rest }: RegionDTO): RegionEntities => {
+        acc[id] = {
+          name: rest.name,
+          data: [],
+          createdAt: rest.created_at,
+          status: LoadStatus.IDLE,
+        };
         return acc;
       },
       {},
@@ -33,7 +41,10 @@ export const getRootInfo = createAsyncThunk<RootEntities>(
 
     const parameters: ParameterEntities =
       data.parameters.reduce<ParameterEntities>(
-        (acc, { id, ...rest }: ParameterDTO): ParameterEntities => {
+        (
+          acc: ParameterEntities,
+          { id, ...rest }: ParameterDTO,
+        ): ParameterEntities => {
           acc[id] = { ...rest };
           return acc;
         },
@@ -51,7 +62,20 @@ export const getRegionData = createAsyncThunk<
 >(
   `${SLICE_NAME}/region`,
   async (regionID: RegionID): Promise<Region> => {
-    return await regionDataAPI(regionID);
+    const regionData: RegionDTO = await regionDataAPI(regionID);
+    return {
+      name: regionData.name,
+      createdAt: regionData.created_at,
+      data: regionData.data.map(
+        (dto: RegionDataDTO): RegionDataEntity => ({
+          id: dto.id,
+          regionID: dto.region_id,
+          parameterID: dto.parameter_id,
+          value: dto.value,
+          year: dto.year,
+        }),
+      ),
+    };
   },
   {
     condition: (regionID: RegionID, { getState }): boolean => {

@@ -9,13 +9,13 @@ import {
 import { NON_SELECTED_TEXT } from "./regionInfo.constants";
 import Chart from "./Chart/Chart";
 import { getSortedData } from "./regionInfo.utils";
-import { EntityForChart, RecordsForChart } from "../regions.types";
+import { EntityChartData, ChartData } from "../regions.types";
 
 function Content(): React.ReactElement {
   const selectedRegion = useAppSelector(selectSelectedRegion);
   const selectedRegionData = useAppSelector(selectSelectedRegionData);
   const parameters = useAppSelector(selectParametersMap);
-  const [data, setData] = React.useState<RecordsForChart>({});
+  const [data, setData] = React.useState<ChartData>({});
 
   React.useEffect((): void => {
     if (selectedRegionData?.data) setData(getSortedData(selectedRegionData));
@@ -29,9 +29,13 @@ function Content(): React.ReactElement {
       {Object.entries(data).map(
         ([parameterID, parameterData]: [
           string,
-          EntityForChart[],
+          EntityChartData[],
         ]): React.ReactElement => (
-          <Chart title={parameters[parameterID].name} data={parameterData} />
+          <Chart
+            key={parameterID}
+            title={parameters[parameterID].name}
+            data={parameterData}
+          />
         ),
       )}
     </>

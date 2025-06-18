@@ -1,22 +1,22 @@
 import {
-  RecordsForChart,
-  EntityForChart,
+  ChartData,
+  EntityChartData,
   Region,
   RegionDataEntity,
 } from "../regions.types";
 
-export const getSortedData: (region: Region) => RecordsForChart = (
+export const getSortedData: (region: Region) => ChartData = (
   region: Region,
-): RecordsForChart => {
-  const data: RecordsForChart = {};
+): ChartData => {
+  const data: ChartData = {};
   region.data.forEach((item: RegionDataEntity): void => {
-    const itemForData: EntityForChart = {
+    const itemForData: EntityChartData = {
       year: item.year,
       value: item.value,
     };
-    if (!data[item.parameter_id]) data[item.parameter_id] = [];
+    if (!data[item.parameterID]) data[item.parameterID] = [];
 
-    data[item.parameter_id].push(itemForData);
+    data[item.parameterID].push(itemForData);
   });
 
   return data;

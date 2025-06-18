@@ -46,6 +46,7 @@ class RegionView(APIView):
         'id': root.id,
         'name': root.name,
         'data': serializer.data,
+        'created_at': root.created_at,
       },
       status=status.HTTP_200_OK
     )

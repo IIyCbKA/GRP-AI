@@ -5,9 +5,9 @@ data    - data list of entity for chart
 */
 
 import { HTMLAttributes } from "react";
-import { EntityForChart } from "../../regions.types";
+import { EntityChartData } from "../../regions.types";
 
 export interface ChartProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
-  data: EntityForChart[];
+  data: EntityChartData[];
 }
