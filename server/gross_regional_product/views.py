@@ -12,6 +12,7 @@ from .serializers import (
   ParametersSerializer
 )
 from .models import Regions, Parameters
+from .services import predict_region_period
 
 
 class RegionsAndParametersView(APIView):
@@ -49,6 +50,26 @@ class RegionView(APIView):
       },
       status=status.HTTP_200_OK
     )
+
+
+class RegionPredictView(APIView):
+  def get(self, request, regionID: int, year: int, period: int):
+    try:
+      result = predict_region_period(
+        region_id=regionID,
+        start_year=year,
+        period=period,
+        window=5,
+      )
+      return Response({"region": regionID,
+                       "period": period,
+                       "forecast": result})
+    except ValueError as exc:
+      return Response({"detail": str(exc)},
+                      status=status.HTTP_400_BAD_REQUEST)
+    except Exception:
+      return Response({"detail": "Internal error"},
+                      status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class CreateRegions(generics.CreateAPIView):
