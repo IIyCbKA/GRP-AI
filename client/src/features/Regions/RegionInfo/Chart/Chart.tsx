@@ -11,9 +11,15 @@ import {
 } from "recharts";
 import { ChartProps } from "./Chart.interface";
 import styles from "./chart.module.css";
+import {
+  DEFAULT_AXIS_MARGIN,
+  LEGEND_HEIGHT,
+  PREDICTION_LINE_NAME,
+  VALUE_LINE_NAME,
+} from "./chart.constants";
 
 export default function Chart({ title, data }: ChartProps): React.ReactElement {
-  const hasPrediction = data.some((p) => p.prediction !== undefined);
+  const hasPrediction = data.some((p): boolean => p.prediction !== undefined);
 
   return (
     <div className={styles.chartWrap}>
@@ -24,24 +30,28 @@ export default function Chart({ title, data }: ChartProps): React.ReactElement {
             data={data}
             margin={{
               top: 5,
-              right: 35,
-              left: 10,
+              right: 40,
+              left: 20,
               bottom: 5,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="year" tickMargin={8} />
-            <YAxis type="number" domain={["auto", "auto"]} tickMargin={8} />
+            <XAxis dataKey="year" tickMargin={DEFAULT_AXIS_MARGIN} />
+            <YAxis
+              type="number"
+              domain={["auto", "auto"]}
+              tickMargin={DEFAULT_AXIS_MARGIN}
+            />
             <Tooltip />
             <Line
-              name="Фактическое"
+              name={VALUE_LINE_NAME}
               type="monotone"
               dataKey="value"
               stroke="#8884d8"
             />
             {hasPrediction && (
               <Line
-                name="Спрогнозированное"
+                name={PREDICTION_LINE_NAME}
                 key="prediction"
                 type="monotone"
                 dataKey="prediction"
@@ -51,8 +61,8 @@ export default function Chart({ title, data }: ChartProps): React.ReactElement {
             )}
             <Legend
               verticalAlign="bottom"
-              height={36}
-              wrapperStyle={{ lineHeight: "36px" }}
+              height={LEGEND_HEIGHT}
+              wrapperStyle={{ lineHeight: `${LEGEND_HEIGHT}px` }}
             />
           </LineChart>
         </ResponsiveContainer>
