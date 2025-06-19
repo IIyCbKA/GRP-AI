@@ -99,8 +99,10 @@ def predict_region_period(
     pred = pred_norm * _scaler.scale_ + _scaler.mean_
 
     target_year = start_year + step
-    out.append({"year": target_year,
-       **{int(pid): float(val) for pid, val in zip(param_ids, pred)}})
+    out.append({
+      "year": target_year,
+      "data": {int(pid): float(val) for pid, val in zip(param_ids, pred)}
+    })
 
     seq_norm = np.vstack([seq_norm[1:], pred_norm])
 

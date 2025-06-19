@@ -142,4 +142,5 @@ export type ChartData = Record<string, EntityChartData[]>;
 export type EntityChartData = {
   year: number;
   value: number;
+  prediction?: number;
 };

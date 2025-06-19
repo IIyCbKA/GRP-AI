@@ -13,10 +13,15 @@ export const getSortedData: (region: Region) => ChartData = (
     const itemForData: EntityChartData = {
       year: item.year,
       value: item.value,
+      prediction: item.prediction,
     };
     if (!data[item.parameterID]) data[item.parameterID] = [];
 
     data[item.parameterID].push(itemForData);
+  });
+
+  Object.keys(data).forEach((key: string): void => {
+    data[key].sort((a, b): number => a.year - b.year);
   });
 
   return data;

@@ -58,22 +58,22 @@ class RegionPredictView(APIView):
   def get(
     self,
     request: Request,
-    regionID: int,
+    region_id: int,
     year: int,
     period: int
   ) -> Response:
     try:
       result = predict_region_period(
-        region_id=regionID,
+        region_id=region_id,
         start_year=year,
         period=period,
         window=LOOKBACK_YEARS,
       )
       return Response(
         {
-          "region": regionID,
+          "id": region_id,
           "period": period,
-          "forecast": result
+          "predict": result
         }, status=status.HTTP_200_OK
       )
 
