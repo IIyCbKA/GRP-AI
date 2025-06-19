@@ -19,7 +19,8 @@ import {
 } from "./chart.constants";
 
 export default function Chart({ title, data }: ChartProps): React.ReactElement {
-  const hasPrediction = data.some((p): boolean => p.prediction !== undefined);
+  const hasPrediction =
+    data && data.some((p): boolean => p.prediction !== undefined);
 
   return (
     <div className={styles.chartWrap}>
@@ -43,12 +44,14 @@ export default function Chart({ title, data }: ChartProps): React.ReactElement {
               tickMargin={DEFAULT_AXIS_MARGIN}
             />
             <Tooltip />
-            <Line
-              name={VALUE_LINE_NAME}
-              type="monotone"
-              dataKey="value"
-              stroke="#8884d8"
-            />
+            {data && (
+              <Line
+                name={VALUE_LINE_NAME}
+                type="monotone"
+                dataKey="value"
+                stroke="#8884d8"
+              />
+            )}
             {hasPrediction && (
               <Line
                 name={PREDICTION_LINE_NAME}

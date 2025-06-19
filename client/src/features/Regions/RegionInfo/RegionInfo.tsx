@@ -14,7 +14,7 @@ import {
 } from "./regionInfo.constants";
 import Chart from "./Chart/Chart";
 import { getSortedData } from "./regionInfo.utils";
-import { EntityChartData, ChartData } from "../regions.types";
+import { ChartData, Parameter, ParameterID } from "../regions.types";
 import classNames from "classnames";
 import Button from "@/components/Buttons/Button/Button";
 
@@ -47,15 +47,15 @@ function Content(): React.ReactElement {
   return (
     <>
       <span className={titleStyles}>{selectedRegionData?.name}</span>
-      {Object.entries(data).map(
-        ([parameterID, parameterData]: [
-          string,
-          EntityChartData[],
+      {Object.entries(parameters).map(
+        ([parameterID, parameter]: [
+          ParameterID,
+          Parameter,
         ]): React.ReactElement => (
           <Chart
             key={parameterID}
-            title={parameters[parameterID].name}
-            data={parameterData}
+            title={parameter.name}
+            data={data[parameterID]}
           />
         ),
       )}
