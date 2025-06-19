@@ -5,10 +5,12 @@ ENDPOINTS:
 
 PATHS:
   REGION      - for get-request that returns a data of existing region
+  PREDICTION  - for get-request that returns a predictions of parameters
 */
 
 export interface PathsDefinitions {
   ROOT_INFO: string;
 
   REGION: (regionID: string) => string;
+  PREDICTION: (regionID: string) => string;
 }

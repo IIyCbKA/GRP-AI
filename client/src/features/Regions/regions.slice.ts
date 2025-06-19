@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   getRegionData as regionDataAPI,
   getRoot as regionsAPI,
+  getParametersPrediction as predictionAPI,
 } from "./regions.api";
 import { SLICE_NAME } from "./regions.constants";
 import { RootState } from "@/store/store";
@@ -19,6 +20,7 @@ import {
   RegionDataDTO,
   RegionDataEntity,
   RootDTO,
+  Prediction,
 } from "./regions.types";
 
 export const getRootInfo = createAsyncThunk<RootEntities>(
@@ -31,6 +33,7 @@ export const getRootInfo = createAsyncThunk<RootEntities>(
         acc[id] = {
           name: rest.name,
           data: [],
+          prediction: {},
           createdAt: rest.created_at,
           status: LoadStatus.IDLE,
         };
@@ -66,6 +69,7 @@ export const getRegionData = createAsyncThunk<
     return {
       name: regionData.name,
       createdAt: regionData.created_at,
+      prediction: {},
       data: regionData.data.map(
         (dto: RegionDataDTO): RegionDataEntity => ({
           id: dto.id,
@@ -87,6 +91,13 @@ export const getRegionData = createAsyncThunk<
           region.status === LoadStatus.FAILED)
       );
     },
+  },
+);
+
+export const getRegionPrediction = createAsyncThunk(
+  `${SLICE_NAME}/prediction`,
+  async (regionID: RegionID): Promise<Prediction> => {
+    return await predictionAPI(regionID);
   },
 );
 
@@ -132,6 +143,10 @@ const regionsSlice = createSlice({
         const regionID = action.meta.arg;
 
         state.regionsMap[regionID].status = LoadStatus.FAILED;
+      })
+      .addCase(getRegionPrediction.fulfilled, (state, action): void => {
+        state.regionsMap[action.payload.id].prediction =
+          action.payload.prediction;
       });
   },
 });

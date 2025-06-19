@@ -10,3 +10,9 @@
   display: flex;
   flex: 1 0 auto;
 }
+
+@media (max-width: 640px) {
+  .contentWrap {
+    padding-bottom: var(--footer-height-mobile);
+  }
+}

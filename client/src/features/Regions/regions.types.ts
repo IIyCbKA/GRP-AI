@@ -37,9 +37,34 @@ status     - status of load of region (filled in on client)
 export type Region = {
   name: string;
   data: RegionDataEntity[];
+  prediction: PredictionData;
   createdAt: string;
   status?: LoadStatus;
 };
+
+/*
+--------------Prediction type--------------
+id          - id of region
+period      - count of years
+prediction  - result of prediction
+*/
+export type Prediction = {
+  id: number;
+  period: number;
+  prediction: PredictionData;
+};
+
+/*
+--------------PredictionData type--------------
+*/
+export type PredictionData = Record<ParameterID, ParameterPredictionData>;
+
+/*
+--------------ParameterPredictionData type--------------
+key    - year
+value  - result of prediction
+*/
+export type ParameterPredictionData = Record<string, number>;
 
 /*
 --------------RegionDTO type--------------

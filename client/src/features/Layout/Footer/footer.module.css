@@ -13,7 +13,7 @@
 @media (max-width: 640px) {
   @layer utils {
     .footerContainer {
-      height: auto;
+      height: var(--footer-height-mobile);
     }
 
     .footerContent {

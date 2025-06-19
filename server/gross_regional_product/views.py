@@ -54,7 +54,7 @@ class RegionView(APIView):
     )
 
 
-class RegionPredictView(APIView):
+class RegionPredictionView(APIView):
   def get(
     self,
     request: Request,
@@ -63,7 +63,7 @@ class RegionPredictView(APIView):
     period: int
   ) -> Response:
     try:
-      result = predict_region_period(
+      result: dict[int, dict[int, float]] = predict_region_period(
         region_id=region_id,
         start_year=year,
         period=period,
@@ -73,7 +73,7 @@ class RegionPredictView(APIView):
         {
           "id": region_id,
           "period": period,
-          "predict": result
+          "prediction": result
         }, status=status.HTTP_200_OK
       )
 

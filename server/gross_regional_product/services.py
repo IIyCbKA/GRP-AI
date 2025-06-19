@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 import json, numpy as np, torch, torch.nn as nn, pandas as pd
 
 from .models import Data
@@ -65,7 +66,7 @@ def predict_region_period(
   start_year: int,
   period: int,
   window: int = LOOKBACK_YEARS
-) -> list[dict[str, float]]:
+) -> dict[int, dict[int, float]]:
   lazy_load()
   r2i = {int(k): v for k, v in _meta["region_to_idx"].items()}
   if region_id not in r2i:
@@ -89,21 +90,28 @@ def predict_region_period(
   seq_norm = _scaler.transform(df.values)
   param_ids = df.columns.tolist()
 
-  out: list[dict[str, float]] = []
+  predictions: list[dict[str, Any]] = []
+
   reg_tensor = torch.tensor([r2i[region_id]], dtype=torch.long, device=DEVICE)
 
   for step in range(period):
-    x_tensor = torch.tensor(seq_norm, dtype=torch.float32).unsqueeze(0).to(DEVICE)
+    x_tensor = torch.tensor(seq_norm, dtype=torch.float32).unsqueeze(0).to(
+      DEVICE)
     with torch.no_grad():
       pred_norm = _model(reg_tensor, x_tensor).cpu().numpy().squeeze()
     pred = pred_norm * _scaler.scale_ + _scaler.mean_
 
     target_year = start_year + step
-    out.append({
+    predictions.append({
       "year": target_year,
       "data": {int(pid): float(val) for pid, val in zip(param_ids, pred)}
     })
 
     seq_norm = np.vstack([seq_norm[1:], pred_norm])
 
-  return out
+  result: dict[int, dict[int, float]] = {
+    pid: {item["year"]: item["data"][pid] for item in predictions}
+    for pid in predictions[0]["data"]
+  }
+
+  return result

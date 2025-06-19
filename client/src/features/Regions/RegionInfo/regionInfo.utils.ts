@@ -13,7 +13,7 @@ export const getSortedData: (region: Region) => ChartData = (
     const itemForData: EntityChartData = {
       year: item.year,
       value: item.value,
-      prediction: item.prediction,
+      prediction: region.prediction?.[item.parameterID]?.[item.year],
     };
     if (!data[item.parameterID]) data[item.parameterID] = [];
 
