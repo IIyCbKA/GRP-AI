@@ -10,8 +10,8 @@ from .views import (
 
 urlpatterns = [
   path('root/', RegionsAndParametersView.as_view(), name='grp_root'),
-  path('region/<int:regionID>/', RegionView.as_view(), name='grp_region'),
-  path('predictions/<int:regionID>/<int:year>/<int:period>/', RegionPredictView.as_view(), name='grp_predict'),
+  path('region/<int:region_id>/', RegionView.as_view(), name='grp_region'),
+  path('predictions/<int:region_id>/<int:year>/<int:period>/', RegionPredictView.as_view(), name='grp_predict'),
   path('create/regions/', CreateRegions.as_view(), name='grp_create_regions'),
   path('create/parameters/', CreateParameters.as_view(), name='grp_create_parameters'),
   path('create/data/', CreateData.as_view(), name='grp_create_data'),

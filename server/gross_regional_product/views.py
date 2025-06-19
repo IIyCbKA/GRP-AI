@@ -34,9 +34,9 @@ class RegionsAndParametersView(APIView):
 
 
 class RegionView(APIView):
-  def get(self, request: Request, regionID: int) -> Response:
+  def get(self, request: Request, region_id: int) -> Response:
     try:
-      root = Regions.objects.get(id=regionID)
+      root = Regions.objects.get(id=region_id)
     except Regions.DoesNotExist:
       return Response(status=status.HTTP_404_NOT_FOUND)
 
