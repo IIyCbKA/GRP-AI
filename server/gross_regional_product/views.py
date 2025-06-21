@@ -69,6 +69,7 @@ class RegionPredictionView(APIView):
         period=period,
         window=LOOKBACK_YEARS,
       )
+
       return Response(
         {
           "id": region_id,

@@ -45,7 +45,7 @@ function Content(): React.ReactElement {
               key={regionID}
               fullWidth
               title={regionData.name}
-              adornment={<Avatar>{avatarTitle}</Avatar>}
+              startIcon={{ content: <Avatar>{avatarTitle}</Avatar> }}
               className={buttonStyles}
               variant="text"
               onClick={(): void => onRegionClick(regionID)}

@@ -53,7 +53,7 @@ function Content({ onCloseMenu }: ContentProps): React.ReactElement {
             <Button
               key={regionID}
               fullWidth
-              adornment={<Avatar>{avatarTitle}</Avatar>}
+              startIcon={{ content: <Avatar>{avatarTitle}</Avatar> }}
               className={buttonStyles}
               variant="text"
               onClick={(): void => onRegionClick(regionID)}

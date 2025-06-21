@@ -85,7 +85,6 @@
   .adornmentContainer {
     height: 75%;
     aspect-ratio: 1/1;
-    margin-right: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,5 +93,13 @@
   .adornmentContainer svg {
     height: 100%;
     width: 100%;
+  }
+
+  .startAdornment {
+    margin-right: 12px;
+  }
+
+  .endAdornment {
+    margin-left: 12px;
   }
 }
