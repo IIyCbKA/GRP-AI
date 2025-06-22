@@ -30,6 +30,16 @@
   user-select: none;
 }
 
+.modalContentWrap {
+  width: 320px;
+  padding: 20px;
+  background-color: var(--default-bgColor);
+  border-radius: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 1040px) {
   .infoWrap {
     padding-left: 0;

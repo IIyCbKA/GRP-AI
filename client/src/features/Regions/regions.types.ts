@@ -169,3 +169,11 @@ export type EntityChartData = {
   value: number;
   prediction?: number;
 };
+
+/*
+-------------- GetPredictionParams type--------------
+*/
+export type GetPredictionParams = {
+  regionID: RegionID;
+  startingYear: number;
+};

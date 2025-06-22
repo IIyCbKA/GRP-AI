@@ -12,5 +12,5 @@ export interface PathsDefinitions {
   ROOT_INFO: string;
 
   REGION: (regionID: string) => string;
-  PREDICTION: (regionID: string) => string;
+  PREDICTION: (regionID: string, startingYear: number) => string;
 }

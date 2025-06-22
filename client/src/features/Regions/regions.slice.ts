@@ -21,6 +21,7 @@ import {
   RegionDataEntity,
   RootDTO,
   Prediction,
+  GetPredictionParams,
 } from "./regions.types";
 
 export const getRootInfo = createAsyncThunk<RootEntities>(
@@ -96,8 +97,8 @@ export const getRegionData = createAsyncThunk<
 
 export const getRegionPrediction = createAsyncThunk(
   `${SLICE_NAME}/prediction`,
-  async (regionID: RegionID): Promise<Prediction> => {
-    return await predictionAPI(regionID);
+  async (params: GetPredictionParams): Promise<Prediction> => {
+    return await predictionAPI(params);
   },
 );
 
