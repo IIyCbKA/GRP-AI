@@ -1,5 +1,5 @@
 .contentWrap {
-  width: 320px;
+  width: var(--min-body-width);
   padding: 20px;
   background-color: var(--default-bgColor);
   border-radius: 10px;

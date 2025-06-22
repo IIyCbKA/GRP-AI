@@ -41,8 +41,12 @@ function ModalInner(
       in={isOpen}
       timeout={animationDuration}
       classNames={{
+        enter: styles.enter,
         enterActive: styles.enterActive,
+        enterDone: styles.enterDone,
+        exit: styles.exit,
         exitActive: styles.exitActive,
+        exitDone: styles.exitDone,
       }}
       unmountOnExit
     >

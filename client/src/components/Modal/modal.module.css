@@ -14,21 +14,22 @@
     --modal-duration: 250ms;
   }
 
-  .enterActive {
-    animation: slideIn var(--modal-duration) ease-out forwards;
+  .enter        { transform: translateY(-1%); opacity: 0; }
+  .enterActive  {
+    transform: translateY(0);
+    opacity: 1;
+    transition:
+      transform var(--modal-duration) ease-out,
+      opacity   var(--modal-duration) ease-out;
   }
-
-  .exitActive {
-    animation: slideOut var(--modal-duration) ease-in forwards;
+  .enterDone    { transform: translateY(0); opacity: 1; }
+  .exit         { transform: translateY(0); opacity: 1; }
+  .exitActive   {
+    transform: translateY(-1%);
+    opacity: 0;
+    transition:
+      transform var(--modal-duration) ease-in,
+      opacity   var(--modal-duration) ease-in;
   }
-
-  @keyframes slideIn {
-    from { transform: translateY(-1%); opacity: 0; }
-    to   { transform: translateY(0);   opacity: 1; }
-  }
-
-  @keyframes slideOut {
-    from { transform: translateY(0);   opacity: 1; }
-    to   { transform: translateY(-1%); opacity: 0; }
-  }
+  .exitDone     { transform: translateY(-1%); opacity: 0; }
 }

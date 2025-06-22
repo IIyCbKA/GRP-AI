@@ -4,6 +4,7 @@
 /* utils - custom classes-redefinitions */
 
 :root {
+  --min-body-width: 320px;
   --lower-font-size: 12px;
   --lower-line-height: 16px;
   --default-font-size: 16px;
@@ -46,7 +47,7 @@
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: var(--min-body-width);
   background-color: var(--default-bgColor);
   font-family: var(--root-font-family), "sans-serif";
   font-size: var(--default-font-size);

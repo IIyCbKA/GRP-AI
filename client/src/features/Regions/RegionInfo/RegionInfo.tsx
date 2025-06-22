@@ -22,9 +22,9 @@ function Content(): React.ReactElement {
   const selectedRegion = useAppSelector(selectSelectedRegion);
   const selectedRegionData = useAppSelector(selectSelectedRegionData);
   const parameters = useAppSelector(selectParametersMap);
-  const [isButtonsLock, setIsButtonsLock] = React.useState<boolean>(false);
-  const [data, setData] = React.useState<ChartData>({});
+  const [isLockButtons, setIsLockButtons] = React.useState<boolean>(false);
   const [isModalShow, setModalShow] = React.useState<boolean>(false);
+  const [data, setData] = React.useState<ChartData>({});
 
   React.useEffect((): void => {
     if (selectedRegionData?.data) setData(getSortedData(selectedRegionData));
@@ -39,11 +39,11 @@ function Content(): React.ReactElement {
   };
 
   const onLockPredictionButtons: () => void = (): void => {
-    setIsButtonsLock(true);
+    setIsLockButtons(true);
   };
 
   const onUnlockPredictionButtons: () => void = (): void => {
-    setIsButtonsLock(false);
+    setIsLockButtons(false);
   };
 
   if (selectedRegion === null)
@@ -70,14 +70,14 @@ function Content(): React.ReactElement {
         <Button
           variant="contained"
           onClick={onShowModal}
-          disabled={isButtonsLock}
+          disabled={isLockButtons}
         >
           {GET_PREDICATION_TEXT}
         </Button>
       </div>
       <PredictionModal
         isShow={isModalShow}
-        isPredictionButtonsLock={isButtonsLock}
+        isPredictionButtonsLock={isLockButtons}
         onClose={onCloseModal}
         onPredictionButtonsLock={onLockPredictionButtons}
         onPredictionButtonsUnlock={onUnlockPredictionButtons}
