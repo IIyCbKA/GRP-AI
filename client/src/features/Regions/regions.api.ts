@@ -22,7 +22,7 @@ export async function getParametersPrediction(
   params: GetPredictionParams,
 ): Promise<Prediction> {
   const { data } = await apiClient.get(
-    PATHS.PREDICTION(params.regionID, params.startingYear),
+    PATHS.PREDICTION(params.regionID, params.startingYear, params.period),
   );
   return data;
 }

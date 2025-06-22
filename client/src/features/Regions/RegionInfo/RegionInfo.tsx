@@ -1,57 +1,34 @@
 import React from "react";
 import styles from "./regionInfo.module.css";
 import sharedStyles from "@/shared/shared.module.css";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import {
-  getRegionPrediction,
   selectParametersMap,
   selectSelectedRegion,
   selectSelectedRegionData,
 } from "../regions.slice";
 import {
-  DEFAULT_START_PRED_YEAR,
   GET_PREDICATION_TEXT,
-  MODAL_TEXT,
   NON_SELECTED_TEXT,
-  PRED_YEAR_LIMIT_TEXT,
-  VALID_YEARS_LIST,
 } from "./regionInfo.constants";
 import Chart from "./Chart/Chart";
 import { getSortedData } from "./regionInfo.utils";
 import { ChartData, Parameter, ParameterID } from "../regions.types";
 import classNames from "classnames";
 import Button from "@/components/Buttons/Button/Button";
-import Modal from "@/components/Modal/Modal";
-import Input from "@/components/Input/Input";
+import PredictionModal from "./PredictionModal/PredictionModal";
 
 function Content(): React.ReactElement {
   const selectedRegion = useAppSelector(selectSelectedRegion);
   const selectedRegionData = useAppSelector(selectSelectedRegionData);
   const parameters = useAppSelector(selectParametersMap);
-  const dispatch = useAppDispatch();
-  const [buttonLock, setButtonLock] = React.useState<boolean>(false);
+  const [isButtonsLock, setIsButtonsLock] = React.useState<boolean>(false);
   const [data, setData] = React.useState<ChartData>({});
   const [isModalShow, setModalShow] = React.useState<boolean>(false);
-  const [startYearPred, setStartYearPred] = React.useState<number>(
-    DEFAULT_START_PRED_YEAR,
-  );
 
   React.useEffect((): void => {
     if (selectedRegionData?.data) setData(getSortedData(selectedRegionData));
   }, [selectedRegionData]);
-
-  const onPredictionClick: () => void = (): void => {
-    if (selectedRegion) {
-      setButtonLock(true);
-      dispatch(
-        getRegionPrediction({
-          regionID: selectedRegion,
-          startingYear: startYearPred,
-        }),
-      ).finally((): void => setButtonLock(false));
-    }
-    onCloseModal();
-  };
 
   const onCloseModal: () => void = (): void => {
     setModalShow(false);
@@ -61,15 +38,12 @@ function Content(): React.ReactElement {
     setModalShow(true);
   };
 
-  const onChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ): void => {
-    setStartYearPred(Number(e.currentTarget.value));
+  const onLockPredictionButtons: () => void = (): void => {
+    setIsButtonsLock(true);
   };
 
-  const onBlurYearCheck: () => void = (): void => {
-    if (!VALID_YEARS_LIST.includes(startYearPred))
-      setStartYearPred(DEFAULT_START_PRED_YEAR);
+  const onUnlockPredictionButtons: () => void = (): void => {
+    setIsButtonsLock(false);
   };
 
   if (selectedRegion === null)
@@ -93,34 +67,21 @@ function Content(): React.ReactElement {
         ),
       )}
       <div className={styles.predictionButtonWrap}>
-        <Button variant="contained" onClick={onShowModal} disabled={buttonLock}>
+        <Button
+          variant="contained"
+          onClick={onShowModal}
+          disabled={isButtonsLock}
+        >
           {GET_PREDICATION_TEXT}
         </Button>
       </div>
-      <Modal isOpen={isModalShow} onClose={onCloseModal}>
-        <div className={styles.modalContentWrap}>
-          <div className={styles.modalTitleWrap}>
-            <span className={styles.modalTitleText}>{MODAL_TEXT}</span>
-            <span className={sharedStyles.lowerText}>
-              {PRED_YEAR_LIMIT_TEXT}
-            </span>
-          </div>
-
-          <Input
-            type="number"
-            value={startYearPred}
-            onChange={onChangeYear}
-            onBlur={onBlurYearCheck}
-          />
-          <Button
-            variant="contained"
-            onClick={onPredictionClick}
-            disabled={buttonLock}
-          >
-            {GET_PREDICATION_TEXT}
-          </Button>
-        </div>
-      </Modal>
+      <PredictionModal
+        isShow={isModalShow}
+        isPredictionButtonsLock={isButtonsLock}
+        onClose={onCloseModal}
+        onPredictionButtonsLock={onLockPredictionButtons}
+        onPredictionButtonsUnlock={onUnlockPredictionButtons}
+      />
     </>
   );
 }

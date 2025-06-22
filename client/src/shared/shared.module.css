@@ -18,3 +18,7 @@
   line-height: var(--upper-line-height);
   text-align: left;
 }
+
+.boldText {
+  font-weight: bold;
+}

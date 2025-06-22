@@ -176,4 +176,5 @@ export type EntityChartData = {
 export type GetPredictionParams = {
   regionID: RegionID;
   startingYear: number;
+  period: number;
 };

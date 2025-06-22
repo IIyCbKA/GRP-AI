@@ -1,0 +1,20 @@
+.contentWrap {
+  width: 320px;
+  padding: 20px;
+  background-color: var(--default-bgColor);
+  border-radius: 10px;
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.yearsBlock {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
