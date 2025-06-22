@@ -13,6 +13,7 @@ import {
   GET_PREDICATION_TEXT,
   MODAL_TEXT,
   NON_SELECTED_TEXT,
+  PRED_YEAR_LIMIT_TEXT,
   VALID_YEARS_LIST,
 } from "./regionInfo.constants";
 import Chart from "./Chart/Chart";
@@ -98,7 +99,13 @@ function Content(): React.ReactElement {
       </div>
       <Modal isOpen={isModalShow} onClose={onCloseModal}>
         <div className={styles.modalContentWrap}>
-          <span>{MODAL_TEXT}</span>
+          <div className={styles.modalTitleWrap}>
+            <span className={styles.modalTitleText}>{MODAL_TEXT}</span>
+            <span className={sharedStyles.lowerText}>
+              {PRED_YEAR_LIMIT_TEXT}
+            </span>
+          </div>
+
           <Input
             type="number"
             value={startYearPred}

@@ -35,9 +35,18 @@
   padding: 20px;
   background-color: var(--default-bgColor);
   border-radius: 10px;
-  gap: 10px;
+  gap: 12px;
   display: flex;
   flex-direction: column;
+}
+
+.modalTitleWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitleText {
+  font-weight: 500;
 }
 
 @media (max-width: 1040px) {
